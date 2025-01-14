@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tip calculator</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .con{
+            background: #d6edff;
+            border-radius: 8px;
+            padding: 10px;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        h1{
+            text-align: center;
+            margin: 10px auto;
+            color: #761efb;
+        }
+    
+        input{
+            padding: 15px;
+            margin: 15px;
+            border: 1px solid #dacaca;
+            border-radius: 7px;
+        }
+
+        form{
+            /* background: #e3d2fd; */
+            padding: 20px;
+            display: block;
+            max-width: 600px;
+            /* border-radius: 7px;
+            border: 1px solid #ddd; */
+        }
+        .inputbox{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        label{
+            font-weight: 600;
+            font-size: 20px;
+        }
+        input[type=submit]{
+            width: 100%;
+            text-align: center;
+            margin: auto;
+            background-color: #761efb;
+            color: #fff;
+            font-size: 20px;
+
+        }
+        .result{
+            border-left: 5px solid #761efb;
+            padding: 5px 10px;
+            font-size: 20px;
+            background-color: #ddd;
+            margin: 10px;
+        }
+        .result span{
+            color: #761efb;
+            display: block;
+            font-weight: 800;
+        }
+    </style>
+</head>
+<body>
+    <div class="con">
+        <h1>Tip Calculator</h1>
+    
+        <form action="">
+            <div class="inputbox">
+                <label for="BillAmount">Bill Amount:</label>
+                <input type="number" name="" id="BillAmount" placeholder="Enter Bill Amount">
+            </div>
+            
+            <div class="inputbox">
+            <label for="tippercentage">Percentage:</label>
+            <input type="number" name="" id="tippercentage" value="10" placeholder="10">
+        </div>
+            <div class="inputbox">
+            <label for="Person">Person:</label>
+            <input type="number" name="" id="Person" placeholder="1" value="1">
+        </div>
+            <input type="submit" value="Submit">
+            <div class="result">
+                <p>Total Amount: 00 INR</p>
+                <span>Tip: 00 INR</span>
+            </div>
+        </form>
+
+    </div>
+    <script>
+     document.querySelector('form').addEventListener("submit", (e) => {
+    e.preventDefault(); // Prevent form submission
+
+    // Get input values
+    let BillAmount = parseFloat(document.querySelector('#BillAmount').value);
+    let tippercentage = parseFloat(document.querySelector('#tippercentage').value);
+    let Person = parseInt(document.querySelector('#Person').value);
+
+    // Calculate tip amount
+    let tipAmount = (BillAmount * tippercentage) / 100;
+
+    // Calculate total amount
+    let totalAmount = BillAmount + tipAmount;
+
+    // Calculate per person amount
+    let amountPerPerson = totalAmount / Person;
+
+    // Update the result in the DOM
+    document.querySelector('.result span').innerText = `Tip: ${tipAmount.toFixed(2)} INR`;
+    document.querySelector('.result p').innerText = `Total Amount: ${totalAmount.toFixed(2)} INR`;
+});
+
+    </script>
+   
+    
+</body>
+</html>
