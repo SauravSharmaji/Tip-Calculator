@@ -1,130 +1,145 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>tip calculator</title>
+    <title>Tip Calculator</title>
     <style>
-        *{
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         }
-        .con{
-            background: #d6edff;
-            border-radius: 8px;
-            padding: 10px;
-        }
-        body{
+
+        body {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-        }
-        h1{
-            text-align: center;
-            margin: 10px auto;
-            color: #761efb;
-        }
-    
-        input{
-            padding: 15px;
-            margin: 15px;
-            border: 1px solid #dacaca;
-            border-radius: 7px;
+            background: linear-gradient(135deg, #e0f7fa, #e8eaf6);
         }
 
-        form{
-            /* background: #e3d2fd; */
-            padding: 20px;
-            display: block;
-            max-width: 600px;
-            /* border-radius: 7px;
-            border: 1px solid #ddd; */
+        .con {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
         }
-        .inputbox{
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #1a237e;
+        }
+
+        form {
+            display: block;
+            width: 100%;
+        }
+
+        .inputbox {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 20px;
         }
-        label{
-            font-weight: 600;
-            font-size: 20px;
-        }
-        input[type=submit]{
-            width: 100%;
-            text-align: center;
-            margin: auto;
-            background-color: #761efb;
-            color: #fff;
-            font-size: 20px;
 
+        label {
+            font-weight: 600;
+            font-size: 16px;
+            color: #333;
+            flex: 1;
         }
-        .result{
-            border-left: 5px solid #761efb;
-            padding: 5px 10px;
-            font-size: 20px;
-            background-color: #ddd;
-            margin: 10px;
+
+        input[type="number"] {
+            padding: 10px 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            flex: 1;
+            margin-left: 15px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
         }
-        .result span{
-            color: #761efb;
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(to right, #4a00e0, #8e2de2);
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f0f4ff;
+            border-left: 5px solid #4a00e0;
+            font-size: 18px;
+            color: #333;
+            border-radius: 8px;
+        }
+
+        .result span {
             display: block;
-            font-weight: 800;
+            font-weight: bold;
+            color: #4a00e0;
+            margin-top: 5px;
         }
     </style>
 </head>
 <body>
     <div class="con">
         <h1>Tip Calculator</h1>
-    
-        <form action="">
+        <form>
             <div class="inputbox">
                 <label for="BillAmount">Bill Amount:</label>
-                <input type="number" name="" id="BillAmount" placeholder="Enter Bill Amount">
+                <input type="number" id="BillAmount" placeholder="Enter Bill Amount">
             </div>
-            
             <div class="inputbox">
-            <label for="tippercentage">Percentage:</label>
-            <input type="number" name="" id="tippercentage" value="10" placeholder="10">
-        </div>
+                <label for="tippercentage">Percentage:</label>
+                <input type="number" id="tippercentage" value="10" placeholder="10">
+            </div>
             <div class="inputbox">
-            <label for="Person">Person:</label>
-            <input type="number" name="" id="Person" placeholder="1" value="1">
-        </div>
-            <input type="submit" value="Submit">
+                <label for="Person">Person:</label>
+                <input type="number" id="Person" value="1" placeholder="1">
+            </div>
+            <input type="submit" value="Calculate Tip">
             <div class="result">
                 <p>Total Amount: 00 INR</p>
                 <span>Tip: 00 INR</span>
             </div>
         </form>
-
     </div>
+
     <script>
-     document.querySelector('form').addEventListener("submit", (e) => {
-    e.preventDefault(); // Prevent form submission
+        document.querySelector('form').addEventListener("submit", (e) => {
+            e.preventDefault();
 
-    // Get input values
-    let BillAmount = parseFloat(document.querySelector('#BillAmount').value);
-    let tippercentage = parseFloat(document.querySelector('#tippercentage').value);
-    let Person = parseInt(document.querySelector('#Person').value);
+            const BillAmount = parseFloat(document.getElementById('BillAmount').value);
+            const tippercentage = parseFloat(document.getElementById('tippercentage').value);
+            const Person = parseInt(document.getElementById('Person').value);
 
-    // Calculate tip amount
-    let tipAmount = (BillAmount * tippercentage) / 100;
+            if (isNaN(BillAmount) || isNaN(tippercentage) || isNaN(Person) || Person <= 0) {
+                alert("Please enter valid values!");
+                return;
+            }
 
-    // Calculate total amount
-    let totalAmount = BillAmount + tipAmount;
+            const tipAmount = (BillAmount * tippercentage) / 100;
+            const totalAmount = BillAmount + tipAmount;
 
-    // Calculate per person amount
-    let amountPerPerson = totalAmount / Person;
-
-    // Update the result in the DOM
-    document.querySelector('.result span').innerText = `Tip: ${tipAmount.toFixed(2)} INR`;
-    document.querySelector('.result p').innerText = `Total Amount: ${totalAmount.toFixed(2)} INR`;
-});
-
+            document.querySelector('.result span').innerText = `Tip: ${tipAmount.toFixed(2)} INR`;
+            document.querySelector('.result p').innerText = `Total Amount: ${totalAmount.toFixed(2)} INR`;
+        });
     </script>
-   
-    
 </body>
 </html>
